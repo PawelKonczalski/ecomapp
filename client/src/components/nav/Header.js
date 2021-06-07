@@ -18,7 +18,7 @@ import {
 function Header() {
     const [showMenu, setShowMenu] = useState(false);
 
-    const handleActive = ele => {
+    const handleActive = (ele) => {
         if ((ele.target.classList[0] === 'navbar-brand' || ele.target.classList[0] === 'nav-link') && ele.target.classList[ele.target.classList.length - 1] !== 'active') {
             document.querySelector('.active').classList.remove('active')
             ele.target.classList.add('active')
