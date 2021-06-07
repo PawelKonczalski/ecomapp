@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import {MDBBtn, MDBContainer, MDBInput} from "mdb-react-ui-kit";
 import {auth} from "../../firebase";
-import {toast, ToastContainer} from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'
+import {toast} from "react-toastify";
 
 function Register() {
     const [email, setEmail] = useState('');
@@ -10,11 +9,11 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const config = {
-            url: 'http://localhost:3000/register/complete',
+            url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
             handleCodeInApp: true
         }
         await auth.sendSignInLinkToEmail(email, config);
-        toast.success(`Email is send to ${email}. Click the link to complere your registration`);
+        toast.success(`E-mail is send to ${email}. Click the link to complete your registration`);
         window.localStorage.setItem('emailForRegistration', email);
         setEmail('')
     }
@@ -32,7 +31,6 @@ function Register() {
             <div className='d-flex flex-row justify-content-center'>
                 <div className='w-50'>
                     <h4>Register</h4>
-                    <ToastContainer/>
                     {registerForm()}
                 </div>
             </div>
