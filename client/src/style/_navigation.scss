@@ -1,0 +1,35 @@
+.container-fluid{
+  .navbar-brand,
+  .nav-link {
+    transition: .4s;
+    &:hover {
+      color: silver;
+    }
+    &.active {
+      color: silver;
+    }
+  }
+  .navbar-toggler{
+    color: white;
+    transition: .4s;
+    &:hover{
+      color: silver;
+    }
+  }
+  .navbar-collapse {
+    .navbar-nav{
+      .nav-item {
+        .nav-link{
+          transition: .4s;
+          color: white;
+          &:hover {
+            color: silver;
+          }
+          &.active {
+            color: silver;
+          }
+        }
+      }
+    }
+  }
+}

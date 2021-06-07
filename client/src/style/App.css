@@ -1,0 +1,26 @@
+body {
+  font-family: Roboto, Helvetica, Arial, sans-serif; }
+
+.container-fluid .navbar-brand,
+.container-fluid .nav-link {
+  transition: .4s; }
+  .container-fluid .navbar-brand:hover,
+  .container-fluid .nav-link:hover {
+    color: silver; }
+  .container-fluid .navbar-brand.active,
+  .container-fluid .nav-link.active {
+    color: silver; }
+.container-fluid .navbar-toggler {
+  color: white;
+  transition: .4s; }
+  .container-fluid .navbar-toggler:hover {
+    color: silver; }
+.container-fluid .navbar-collapse .navbar-nav .nav-item .nav-link {
+  transition: .4s;
+  color: white; }
+  .container-fluid .navbar-collapse .navbar-nav .nav-item .nav-link:hover {
+    color: silver; }
+  .container-fluid .navbar-collapse .navbar-nav .nav-item .nav-link.active {
+    color: silver; }
+
+/*# sourceMappingURL=App.css.map */
