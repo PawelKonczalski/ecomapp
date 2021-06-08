@@ -22,7 +22,7 @@ function Register() {
         <form onSubmit={handleSubmit}>
             <MDBInput type='email' label='Enter your email' value={email} onChange={e => setEmail(e.target.value)}
                       autoFocus/>
-            <MDBBtn type='submit' rounded className='mt-2'>Register</MDBBtn>
+            <MDBBtn type='submit' rounded className='mt-3'>Register</MDBBtn>
         </form>
     )
 
