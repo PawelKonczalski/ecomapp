@@ -1,5 +1,7 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import firebase from "firebase";
+import {useDispatch} from "react-redux";
+import {Link, useHistory} from "react-router-dom";
 import {
     MDBContainer,
     MDBNavbar,
@@ -17,15 +19,26 @@ import {
 
 function Header() {
     const [showMenu, setShowMenu] = useState(false);
+    let dispatch = useDispatch();
+    let history = useHistory();
 
     const handleActive = (ele) => {
         if ((ele.target.classList[0] === 'navbar-brand' || ele.target.classList[0] === 'nav-link') && ele.target.classList[ele.target.classList.length - 1] !== 'active') {
             document.querySelector('.active').classList.remove('active')
             ele.target.classList.add('active')
-        } else if (ele.target.classList[0] === 'fa' && ele.target.parentElement.classList[ele.target.classList.length - 1] !== 'active'){
+        } else if (ele.target.classList[0] === 'fa' && ele.target.parentElement.classList[ele.target.classList.length - 1] !== 'active') {
             document.querySelector('.active').classList.remove('active')
             ele.target.parentElement.classList.add('active')
         }
+    }
+
+    const logout = () => {
+        firebase.auth().signOut()
+        dispatch({
+            type: 'LOGOUT',
+            payload: null
+        })
+        history.push('/login')
     }
 
     return (
@@ -58,6 +71,9 @@ function Header() {
                                         </MDBDropdownItem>
                                         <MDBDropdownItem>
                                             <MDBDropdownLink href='#'>option 2</MDBDropdownLink>
+                                        </MDBDropdownItem>
+                                        <MDBDropdownItem>
+                                            <MDBDropdownLink href='#' onClick={logout}>Logout</MDBDropdownLink>
                                         </MDBDropdownItem>
                                     </MDBDropdownMenu>
                                 </MDBDropdown>

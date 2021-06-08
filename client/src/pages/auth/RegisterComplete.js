@@ -47,9 +47,9 @@ function RegisterComplete({history}) {
             <MDBInput type='email' label='Enter your email' value={email} disabled/>
             <MDBInput type='password' label='Password' className='mt-3' value={password}
                       onChange={e => setPassword(e.target.value)} autoFocus/>
-            <MDBInput type='password' label='Password' className='mt-3' value={passwordConfirm}
+            <MDBInput type='password' label='Confirm Password' className='mt-3' value={passwordConfirm}
                       onChange={e => setPasswordConfirm(e.target.value)}/>
-            <MDBBtn type='submit' rounded className='mt-2'>Complete Registration</MDBBtn>
+            <MDBBtn type='submit' rounded className='mt-3'>Complete Registration</MDBBtn>
         </form>
     )
 
