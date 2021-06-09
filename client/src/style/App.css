@@ -3,13 +3,10 @@ body {
 
 .container-fluid .navbar-brand,
 .container-fluid .nav-link {
-  transition: .4s; }
+  border-bottom: transparent solid 2px; }
   .container-fluid .navbar-brand:hover,
   .container-fluid .nav-link:hover {
-    color: silver; }
-  .container-fluid .navbar-brand.active,
-  .container-fluid .nav-link.active {
-    color: silver; }
+    border-bottom: white solid 2px; }
 .container-fluid .navbar-toggler {
   color: white;
   transition: .4s; }
@@ -17,10 +14,9 @@ body {
     color: silver; }
 .container-fluid .navbar-collapse .navbar-nav .nav-item .nav-link {
   transition: .4s;
-  color: white; }
+  color: white;
+  border-bottom: transparent solid 2px; }
   .container-fluid .navbar-collapse .navbar-nav .nav-item .nav-link:hover {
-    color: silver; }
-  .container-fluid .navbar-collapse .navbar-nav .nav-item .nav-link.active {
-    color: silver; }
+    border-bottom: white solid 2px; }
 
 /*# sourceMappingURL=App.css.map */

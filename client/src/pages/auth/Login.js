@@ -1,16 +1,57 @@
-import React, {useState} from "react";
-import {MDBBtn, MDBContainer, MDBIcon, MDBInput} from "mdb-react-ui-kit";
-import {auth} from "../../firebase";
+import React, {useEffect, useState} from "react";
+import {MDBBtn, MDBContainer, MDBIcon, MDBInput, MDBSpinner} from "mdb-react-ui-kit";
+import {auth, googleAuthProvider} from "../../firebase";
 import {toast} from "react-toastify";
+import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 
-function Login() {
+function Login({history}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const {user} = useSelector((state) => ({...state}));
+    let dispatch = useDispatch();
+
+    useEffect(() => {
+        if (user && user.token) {
+            history.push('/')
+        }
+    }, [user])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email, password)
+        setLoading(true);
+        try {
+            const result = await auth.signInWithEmailAndPassword(email, password);
+            const {user} = result
+            const idTokenResult = await user.getIdTokenResult()
+            dispatch({
+                type: 'LOGGED_IN_USER',
+                payload: {
+                    email: user.email,
+                    token: idTokenResult.token
+                }
+            })
+        } catch (error) {
+            toast.error(error.message);
+            setLoading(false);
+        }
+        history.push('/')
+    }
 
+    const handleGoogleLogin = async () => {
+        auth.signInWithPopup(googleAuthProvider).then(async (result) => {
+            const {user} = result;
+            const idTokenResult = await user.getIdTokenResult()
+            dispatch({
+                type: 'LOGGED_IN_USER',
+                payload: {
+                    email: user.email,
+                    token: idTokenResult.token
+                }
+            })
+            history.push('/')
+        }).catch((err) => toast.error(err.message));
     }
 
     const loginForm = () => (
@@ -31,8 +72,14 @@ function Login() {
         <MDBContainer className='p-5'>
             <div className='d-flex flex-row justify-content-center'>
                 <div className='w-50'>
-                    <h4>Logi</h4>
+                    {loading ? (<h4 className='text-danger'>Login... <MDBSpinner grow role='status'/></h4>) : (<h4>Login</h4>)}
                     {loginForm()}
+                    <MDBBtn type='button' rounded className='mt-3 w-100' onClick={handleGoogleLogin}
+                             color='secondary'>
+                        <MDBIcon className='me-2' icon='envelope' size='lg'/>
+                        Login with Google
+                    </MDBBtn>
+                    <Link to='forgot/password' className='d-flex justify-content-end mt-3 text-danger text-decoration-underline'>Forgot password</Link>
                 </div>
             </div>
         </MDBContainer>

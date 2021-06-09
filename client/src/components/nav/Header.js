@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import firebase from "firebase";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link, useHistory} from "react-router-dom";
 import {
     MDBContainer,
@@ -20,17 +20,8 @@ import {
 function Header() {
     const [showMenu, setShowMenu] = useState(false);
     let dispatch = useDispatch();
+    let {user} = useSelector((state) => ({...state}));
     let history = useHistory();
-
-    const handleActive = (ele) => {
-        if ((ele.target.classList[0] === 'navbar-brand' || ele.target.classList[0] === 'nav-link') && ele.target.classList[ele.target.classList.length - 1] !== 'active') {
-            document.querySelector('.active').classList.remove('active')
-            ele.target.classList.add('active')
-        } else if (ele.target.classList[0] === 'fa' && ele.target.parentElement.classList[ele.target.classList.length - 1] !== 'active') {
-            document.querySelector('.active').classList.remove('active')
-            ele.target.parentElement.classList.add('active')
-        }
-    }
 
     const logout = () => {
         firebase.auth().signOut()
@@ -45,7 +36,7 @@ function Header() {
         <>
             <MDBNavbar expand='lg' dark bgColor='primary'>
                 <MDBContainer fluid>
-                    <Link to="/" className="navbar-brand active" onClick={handleActive}>
+                    <Link to="/" className="navbar-brand active">
                         <MDBIcon icon='fas fa-home pe-2'/>
                         Home
                     </Link>
@@ -59,11 +50,12 @@ function Header() {
                     </MDBNavbarToggler>
                     <MDBCollapse navbar show={showMenu}>
                         <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
-                            <MDBNavbarItem>
+                            {user && (
+                            <MDBNavbarItem className={showMenu ? '' : 'ms-auto'}>
                                 <MDBDropdown>
                                     <MDBDropdownToggle tag='a' className='nav-link'>
                                         <MDBIcon icon='cog pe-2'/>
-                                        Username
+                                        {user.email && user.email.split('@')[0]}
                                     </MDBDropdownToggle>
                                     <MDBDropdownMenu>
                                         <MDBDropdownItem>
@@ -78,18 +70,23 @@ function Header() {
                                     </MDBDropdownMenu>
                                 </MDBDropdown>
                             </MDBNavbarItem>
-                            <MDBNavbarItem className={showMenu ? '' : 'ms-auto'}>
-                                <Link to='login' className='nav-link' onClick={handleActive}>
-                                    <MDBIcon icon='fas fa-sign-in-alt pe-2'/>
-                                    Login
-                                </Link>
-                            </MDBNavbarItem>
-                            <MDBNavbarItem>
-                                <Link to='register' className='nav-link' onClick={handleActive}>
-                                    <MDBIcon icon='far fa-registered pe-2'/>
-                                    Register
-                                </Link>
-                            </MDBNavbarItem>
+                            )}
+                            {!user && (
+                                <MDBNavbarItem className={showMenu ? '' : 'ms-auto'}>
+                                    <Link to='login' className='nav-link'>
+                                        <MDBIcon icon='fas fa-sign-in-alt pe-2'/>
+                                        Login
+                                    </Link>
+                                </MDBNavbarItem>
+                            )}
+                            {!user && (
+                                <MDBNavbarItem>
+                                    <Link to='register' className='nav-link'>
+                                        <MDBIcon icon='far fa-registered pe-2'/>
+                                        Register
+                                    </Link>
+                                </MDBNavbarItem>
+                            )}
                         </MDBNavbarNav>
                     </MDBCollapse>
                 </MDBContainer>

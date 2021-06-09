@@ -1,10 +1,18 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {MDBBtn, MDBContainer, MDBInput} from "mdb-react-ui-kit";
 import {auth} from "../../firebase";
 import {toast} from "react-toastify";
+import {useSelector} from "react-redux";
 
-function Register() {
+function Register({history}) {
     const [email, setEmail] = useState('');
+    const {user} = useSelector((state) => ({...state}));
+
+    useEffect(() => {
+        if (user && user.token) {
+            history.push('/')
+        }
+    }, [user])
 
     const handleSubmit = async (e) => {
         e.preventDefault();

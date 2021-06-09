@@ -1,32 +1,32 @@
-.container-fluid{
+.container-fluid {
   .navbar-brand,
   .nav-link {
+    border-bottom: transparent solid 2px;
+
+    &:hover {
+      border-bottom: white solid 2px;
+    }
+  }
+
+  .navbar-toggler {
+    color: white;
     transition: .4s;
+
     &:hover {
       color: silver;
     }
-    &.active {
-      color: silver;
-    }
   }
-  .navbar-toggler{
-    color: white;
-    transition: .4s;
-    &:hover{
-      color: silver;
-    }
-  }
+
   .navbar-collapse {
-    .navbar-nav{
+    .navbar-nav {
       .nav-item {
-        .nav-link{
+        .nav-link {
           transition: .4s;
           color: white;
+          border-bottom: transparent solid 2px;
+
           &:hover {
-            color: silver;
-          }
-          &.active {
-            color: silver;
+            border-bottom: white solid 2px;
           }
         }
       }
