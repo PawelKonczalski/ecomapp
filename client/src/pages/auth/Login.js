@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {MDBBtn, MDBContainer, MDBIcon, MDBInput, MDBSpinner} from "mdb-react-ui-kit";
 import {auth, googleAuthProvider} from "../../firebase";
 import {toast} from "react-toastify";
+import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 
@@ -18,6 +19,14 @@ function Login({history}) {
         }
     }, [user])
 
+    const createOrUpdateUser = async (authtoken) => {
+        return await axios.post(process.env.REACT_APP_API, {}, {
+            headers: {
+                authtoken,
+            }
+        })
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -25,13 +34,16 @@ function Login({history}) {
             const result = await auth.signInWithEmailAndPassword(email, password);
             const {user} = result
             const idTokenResult = await user.getIdTokenResult()
-            dispatch({
-                type: 'LOGGED_IN_USER',
-                payload: {
-                    email: user.email,
-                    token: idTokenResult.token
-                }
-            })
+            createOrUpdateUser(idTokenResult.token)
+                .then((res) => console.log('create or update res', res))
+                .catch()
+        //     dispatch({
+        //         type: 'LOGGED_IN_USER',
+        //         payload: {
+        //             email: user.email,
+        //             token: idTokenResult.token
+        //         }
+        //     })
         } catch (error) {
             toast.error(error.message);
             setLoading(false);
