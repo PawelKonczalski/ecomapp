@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {MDBBtn, MDBContainer, MDBIcon, MDBInput, MDBSpinner} from "mdb-react-ui-kit";
 import {auth, googleAuthProvider} from "../../firebase";
 import {toast} from "react-toastify";
-import { createOrUpdateUser } from "../../functions/auth";
+import {createOrUpdateUser} from "../../functions/auth";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 
@@ -19,6 +19,14 @@ function Login({history}) {
         }
     }, [user])
 
+    const roleBasedRedirect = (res) => {
+        if(res.data.role === 'admin'){
+            history.push('/admin/dashboard')
+        } else {
+            history.push('/user/dashboard')
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -27,18 +35,20 @@ function Login({history}) {
             const {user} = result
             const idTokenResult = await user.getIdTokenResult()
             createOrUpdateUser(idTokenResult.token)
-                .then((res) => dispatch({
-                    type: 'LOGGED_IN_USER',
-                    payload: {
-                        name: res.data.name,
-                        email: res.data.email,
-                        token: idTokenResult.token,
-                        role: res.data.role,
-                        _id: res.data._id
-                    }
-                }))
+                .then((res) => {
+                    dispatch({
+                        type: 'LOGGED_IN_USER',
+                        payload: {
+                            name: res.data.name,
+                            email: res.data.email,
+                            token: idTokenResult.token,
+                            role: res.data.role,
+                            _id: res.data._id
+                        }
+                    })
+                    roleBasedRedirect(res)
+                })
                 .catch()
-            history.push('/')
         } catch (error) {
             toast.error(error.message);
             setLoading(false);
@@ -50,7 +60,8 @@ function Login({history}) {
             const {user} = result;
             const idTokenResult = await user.getIdTokenResult()
             createOrUpdateUser(idTokenResult.token)
-                .then((res) => dispatch({
+                .then((res) => {
+                    dispatch({
                     type: 'LOGGED_IN_USER',
                     payload: {
                         name: res.data.name,
@@ -59,9 +70,10 @@ function Login({history}) {
                         role: res.data.role,
                         _id: res.data._id
                     }
-                }))
-                .catch()
-            history.push('/')
+                })
+            roleBasedRedirect(res)
+        })
+        .catch()
         }).catch((err) => toast.error(err.message));
     }
 
