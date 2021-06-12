@@ -3,16 +3,16 @@ import {Link} from 'react-router-dom'
 import {MDBContainer, MDBNavbar, MDBNavbarItem} from "mdb-react-ui-kit";
 
 const UserNav = () => (
-    <MDBNavbar className='shadow-0 h-75'>
+    <MDBNavbar className='shadow-0'>
         <MDBContainer className='w-50'>
             <MDBNavbarItem tag='a' className='py-2 text-uppercase'>
-                <Link to='user/dashboard'>Dashboard</Link>
+                <Link to='dashboard'>Dashboard</Link>
             </MDBNavbarItem>
             <MDBNavbarItem tag='a' className='py-2 text-uppercase'>
-                <Link to='user/password'>Password</Link>
+                <Link to='password'>Password</Link>
             </MDBNavbarItem>
             <MDBNavbarItem tag='a' className='py-2 text-uppercase'>
-                <Link to='user/wishlist'>Wishlist</Link>
+                <Link to='wishlist'>Wishlist</Link>
             </MDBNavbarItem>
         </MDBContainer>
     </MDBNavbar>

@@ -9,6 +9,8 @@ import Header from "./components/nav/Header";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import UserDashboard from "./pages/user/UserDashboard";
+import Password from "./pages/user/Password";
+import Wishlist from "./pages/user/Wishlist";
 import UserRoute from "./components/routes/UserRoute";
 import {auth} from "./firebase";
 import {useDispatch} from "react-redux";
@@ -45,11 +47,13 @@ function App() {
             <ToastContainer/>
             <Switch>
                 <Route path="/" exact component={Home}/>
-                <Route path="/login" exact component={Login}/>
+                <Route path="/login"  component={Login}/>
                 <Route path="/register" exact component={Register}/>
-                <Route path="/register/complete" exact component={RegisterComplete}/>
-                <Route path="/forgot/password" exact component={ForgotPassword}/>
-                <UserRoute path="/user/dashboard" exact component={UserDashboard}/>
+                <Route path="/register/complete"  component={RegisterComplete}/>
+                <Route path="/forgot/password"  component={ForgotPassword}/>
+                <UserRoute path="/user/dashboard"  component={UserDashboard}/>
+                <UserRoute path="/user/password"  component={Password}/>
+                <UserRoute path="/user/wishlist"  component={Wishlist}/>
             </Switch>
         </>
     );
