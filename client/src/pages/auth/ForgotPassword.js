@@ -34,7 +34,7 @@ function ForgotPassword({history}) {
     }
 
     return (
-        <MDBContainer className='p-5 w-50'>
+        <MDBContainer className='p-5 w-75'>
             {loading ? <h4 className='text-danger'>Loading</h4> : <h4>Forgot Password</h4>}
             <form onSubmit={handleSubmit}>
                 <MDBInput type='email' value={email} onChange={e => setEmail(e.target.value)} label='Type your email'

@@ -51,25 +51,23 @@ function Header() {
                     <MDBCollapse navbar show={showMenu}>
                         <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
                             {user && (
-                            <MDBNavbarItem className={showMenu ? '' : 'ms-auto'}>
-                                <MDBDropdown>
-                                    <MDBDropdownToggle tag='a' className='nav-link'>
-                                        <MDBIcon icon='cog pe-2'/>
-                                        {user.email && user.email.split('@')[0]}
-                                    </MDBDropdownToggle>
-                                    <MDBDropdownMenu>
-                                        <MDBDropdownItem>
-                                            <MDBDropdownLink href='#'>option 1</MDBDropdownLink>
-                                        </MDBDropdownItem>
-                                        <MDBDropdownItem>
-                                            <MDBDropdownLink href='#'>option 2</MDBDropdownLink>
-                                        </MDBDropdownItem>
-                                        <MDBDropdownItem>
-                                            <MDBDropdownLink href='#' onClick={logout}>Logout</MDBDropdownLink>
-                                        </MDBDropdownItem>
-                                    </MDBDropdownMenu>
-                                </MDBDropdown>
-                            </MDBNavbarItem>
+                                <MDBNavbarItem className={showMenu ? '' : 'ms-auto'}>
+                                    <MDBDropdown>
+                                        <MDBDropdownToggle tag='a' className='nav-link'>
+                                            <MDBIcon icon='cog pe-2'/>
+                                            {user.email && user.email.split('@')[0]}
+                                        </MDBDropdownToggle>
+                                        <MDBDropdownMenu>
+                                            {user && user.role === 'subscriber' && (
+                                                <Link to='/user/dashboard' className='dropdown-item'>Dashboard</Link>)}
+                                            {user && user.role === 'admin' && (
+                                                <Link to='/admin/dashboard' className='dropdown-item'>Dashboard</Link>)}
+                                            <MDBDropdownItem>
+                                                <MDBDropdownLink href='#' onClick={logout}>Logout</MDBDropdownLink>
+                                            </MDBDropdownItem>
+                                        </MDBDropdownMenu>
+                                    </MDBDropdown>
+                                </MDBNavbarItem>
                             )}
                             {!user && (
                                 <MDBNavbarItem className={showMenu ? '' : 'ms-auto'}>

@@ -14,6 +14,7 @@ import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
 import UserRoute from "./components/routes/UserRoute";
 import AdminRoute from "./components/routes/AdminRoute";
+import CategoryCreate from "./pages/admin/category/CategoryCreate";
 import {auth} from "./firebase";
 import {useDispatch} from "react-redux";
 import {currentUser} from "./functions/auth";
@@ -56,7 +57,8 @@ function App() {
                 <UserRoute path="/user/dashboard"  component={UserDashboard}/>
                 <UserRoute path="/user/password"  component={Password}/>
                 <UserRoute path="/user/wishlist"  component={Wishlist}/>
-                <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}/>
+                <AdminRoute path="/admin/dashboard"  component={AdminDashboard}/>
+                <AdminRoute path="/admin/category"  component={CategoryCreate}/>
             </Switch>
         </>
     );

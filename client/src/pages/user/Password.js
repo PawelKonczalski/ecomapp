@@ -44,7 +44,7 @@ const Password = () => {
     return (
         <MDBContainer className='p-0' fluid>
             <div className='d-flex'>
-                <div className=''>
+                <div className='w-25'>
                     <UserNav/>
                 </div>
                 <div className='row align-self-center'>
