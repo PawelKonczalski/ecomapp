@@ -29,11 +29,14 @@ const Password = () => {
         <form onSubmit={handleSubmit}>
             <MDBInputGroup>
                 <MDBInputGroupText>Your Password</MDBInputGroupText>
-                <MDBInputGroupElement type='password' placeholder='Enter new password'
-                                      onChange={e => setPassword(e.target.value)} disable={loading} value={password}/>
-                <MDBInputGroupElement type='password' placeholder='Confirm new password'
-                                      onChange={e => setConfirmPassword(e.target.value)} disable={loading} value={confirmPassword}/>
-                <MDBBtn type='submit' disabled={password !== confirmPassword || password.length < 6} outline>Submit</MDBBtn>
+                {loading ? undefined : <MDBInputGroupElement type='password' placeholder='Enter new password'
+                                                             onChange={e => setPassword(e.target.value)}
+                                                             value={password}/>}
+                {loading ? undefined : <MDBInputGroupElement type='password' placeholder='Confirm new password'
+                                                             onChange={e => setConfirmPassword(e.target.value)}
+                                                             value={confirmPassword}/>}
+                <MDBBtn type='submit' disabled={password !== confirmPassword || password.length < 6}
+                        outline>Submit</MDBBtn>
             </MDBInputGroup>
         </form>
     )
@@ -45,7 +48,8 @@ const Password = () => {
                     <UserNav/>
                 </div>
                 <div className='row align-self-center'>
-                    {loading ? <h4 className='text-danger mb-3'>Loading...</h4> : <h4 className='mb-3'>Password update</h4>}
+                    {loading ? <h4 className='text-danger mb-3'>Loading...</h4> :
+                        <h4 className='mb-3'>Password update</h4>}
                     {passwordUpdateForm()}
                 </div>
             </div>

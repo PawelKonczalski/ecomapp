@@ -9,9 +9,11 @@ import Header from "./components/nav/Header";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import UserDashboard from "./pages/user/UserDashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
 import UserRoute from "./components/routes/UserRoute";
+import AdminRoute from "./components/routes/AdminRoute";
 import {auth} from "./firebase";
 import {useDispatch} from "react-redux";
 import {currentUser} from "./functions/auth";
@@ -39,7 +41,7 @@ function App() {
                 return () => unsubscribe()
             }
         })
-    }, [])
+    }, [dispatch])
 
     return (
         <>
@@ -54,6 +56,7 @@ function App() {
                 <UserRoute path="/user/dashboard"  component={UserDashboard}/>
                 <UserRoute path="/user/password"  component={Password}/>
                 <UserRoute path="/user/wishlist"  component={Wishlist}/>
+                <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}/>
             </Switch>
         </>
     );

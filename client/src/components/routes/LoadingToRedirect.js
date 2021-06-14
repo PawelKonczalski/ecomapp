@@ -12,7 +12,7 @@ const LoadingToRedirect = () => {
         }, 1000)
         count === 0 && history.push('/')
         return () => clearInterval(interval)
-    }, [count])
+    }, [count, history])
 
     return <h1 className='d-flex justify-content-center mt-5 text-danger'>Redirecting in {count} seconds</h1>
 }
