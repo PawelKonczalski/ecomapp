@@ -29,12 +29,14 @@ const Password = () => {
         <form onSubmit={handleSubmit}>
             <MDBInputGroup>
                 <MDBInputGroupText>Your Password</MDBInputGroupText>
-                {loading ? undefined : <MDBInputGroupElement type='password' placeholder='Enter new password'
-                                                             onChange={e => setPassword(e.target.value)}
-                                                             value={password}/>}
-                {loading ? undefined : <MDBInputGroupElement type='password' placeholder='Confirm new password'
-                                                             onChange={e => setConfirmPassword(e.target.value)}
-                                                             value={confirmPassword}/>}
+                {loading ? <h4 className='text-danger'>Loading...</h4> :
+                    <MDBInputGroupElement type='password' placeholder='Enter new password'
+                                          onChange={e => setPassword(e.target.value)}
+                                          value={password}/>}
+                {loading ? <h4 className='text-danger'>Loading...</h4> :
+                    <MDBInputGroupElement type='password' placeholder='Confirm new password'
+                                          onChange={e => setConfirmPassword(e.target.value)}
+                                          value={confirmPassword}/>}
                 <MDBBtn type='submit' disabled={password !== confirmPassword || password.length < 6}
                         outline>Submit</MDBBtn>
             </MDBInputGroup>

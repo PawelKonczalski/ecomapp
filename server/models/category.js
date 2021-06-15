@@ -3,8 +3,7 @@ const mongoose = require('mongoose')
 const categorySchema = new mongoose.Schema({
     mame: {
         type: String,
-        time: true,
-        required: 'Name is required',
+        trim: true,
         minlength: [2, 'Too short'],
         maxlength: [32, 'Too long']
     },
