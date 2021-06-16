@@ -21,7 +21,7 @@ exports.read = async (req, res) => {
 exports.update = async (req, res) => {
     const {name} = req.body
     try {
-        res.json(await Category.findOneAndUpdate({slug: req.params.slug}, {name, slug: slugify.name}, {new: true}))
+        res.json(await Category.findOneAndUpdate({slug: req.params.slug}, {name, slug: slugify(name)}, {new: true}))
     } catch (err) {
         res.status(400).send('Category update failed')
     }
@@ -29,7 +29,7 @@ exports.update = async (req, res) => {
 
 exports.remove = async (req, res) => {
     try {
-        req.json(await Category.findOneAndDelete({slug: req.params.slug}))
+        res.json(await Category.findOneAndDelete({slug: req.params.slug}))
     } catch (err) {
         res.status(400).send('Category delete failed')
     }
