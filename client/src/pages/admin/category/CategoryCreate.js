@@ -65,7 +65,7 @@ const CategoryCreate = () => {
     }
 
     const CategoryForm = () => (
-        <form onSubmit={handleSubmit} className='px-0'>
+        <form onSubmit={handleSubmit} className='px-0 mb-5'>
             <label className='form-label px-3'>
                 Name
             </label>
@@ -73,7 +73,7 @@ const CategoryCreate = () => {
                 {loading ? <h4 className='text-danger'>Loading...</h4> :
                     <MDBInputGroupElement type='text' onChange={(e) => setName(e.target.value)}
                                           placeholder="Category name" autoFocus required/>}
-                <MDBBtn type='submit' disabled={loading} outline>Button</MDBBtn>
+                <MDBBtn type='submit' disabled={loading} outline>Save</MDBBtn>
             </MDBInputGroup>
         </form>
     )
@@ -85,7 +85,7 @@ const CategoryCreate = () => {
                     <AdminNav/>
                 </div>
                 <div className='d-flex row w-75'>
-                    <h4 className=' mt-3 text-uppercase'>Create category</h4>
+                    <h4 className='my-4 text-uppercase'>Create category</h4>
                     {CategoryForm()}
                     <MDBContainer className='p-0'>
                         <MDBListGroup className='w-75 px-3' horizontal>
@@ -99,7 +99,7 @@ const CategoryCreate = () => {
                                     {c.slug}
                                 </MDBListGroupItem>
                                 <MDBListGroupItem>
-                                    <Link to={`/admin/category/${c.name}`}>
+                                    <Link to={`/admin/category/${c.slug}`}>
                                         <MDBIcon icon='edit' className='text-warning'/>
                                     </Link>
                                 </MDBListGroupItem>

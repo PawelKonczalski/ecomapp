@@ -15,6 +15,7 @@ import Wishlist from "./pages/user/Wishlist";
 import UserRoute from "./components/routes/UserRoute";
 import AdminRoute from "./components/routes/AdminRoute";
 import CategoryCreate from "./pages/admin/category/CategoryCreate";
+import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
 import {auth} from "./firebase";
 import {useDispatch} from "react-redux";
 import {currentUser} from "./functions/auth";
@@ -50,15 +51,16 @@ function App() {
             <ToastContainer/>
             <Switch>
                 <Route path="/" exact component={Home}/>
-                <Route path="/login"  component={Login}/>
+                <Route path="/login" exact component={Login}/>
                 <Route path="/register" exact component={Register}/>
-                <Route path="/register/complete"  component={RegisterComplete}/>
-                <Route path="/forgot/password"  component={ForgotPassword}/>
-                <UserRoute path="/user/dashboard"  component={UserDashboard}/>
-                <UserRoute path="/user/password"  component={Password}/>
-                <UserRoute path="/user/wishlist"  component={Wishlist}/>
-                <AdminRoute path="/admin/dashboard"  component={AdminDashboard}/>
-                <AdminRoute path="/admin/category"  component={CategoryCreate}/>
+                <Route path="/register/complete" exact component={RegisterComplete}/>
+                <Route path="/forgot/password" exact component={ForgotPassword}/>
+                <UserRoute path="/user/dashboard" exact component={UserDashboard}/>
+                <UserRoute path="/user/password" exact component={Password}/>
+                <UserRoute path="/user/wishlist" exact component={Wishlist}/>
+                <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}/>
+                <AdminRoute path="/admin/category" exact component={CategoryCreate}/>
+                <AdminRoute path="/admin/category/:slug" exact component={CategoryUpdate}/>
             </Switch>
         </>
     );
