@@ -1,23 +1,22 @@
 import React, {useState, useEffect} from "react";
 import AdminNav from "../../../components/nav/AdminNav";
 import {
-    MDBBtn,
-    MDBContainer, MDBIcon,
-    MDBInputGroup,
-    MDBInputGroupElement,
-    MDBListGroup,
+    MDBContainer, MDBIcon, MDBListGroup,
     MDBListGroupItem
 } from "mdb-react-ui-kit";
 import {toast} from "react-toastify";
 import {useSelector} from "react-redux";
 import {createCategory, removeCategory, getCategories} from "../../../functions/category";
 import {Link} from "react-router-dom";
+import CategoryForm from "../../../components/forms/CategoryForm";
+import LocalSearch from "../../../components/forms/LocalSearch";
 
 const CategoryCreate = () => {
     const {user} = useSelector(state => ({...state}))
     const [name, setName] = useState('')
     const [loading, setLoading] = useState(false)
     const [categories, setCategories] = useState([])
+    const [search, setSearch] = useState('')
 
     const loadCategories = () => (
         getCategories()
@@ -64,19 +63,7 @@ const CategoryCreate = () => {
             })
     }
 
-    const CategoryForm = () => (
-        <form onSubmit={handleSubmit} className='px-0 mb-5'>
-            <label className='form-label px-3'>
-                Name
-            </label>
-            <MDBInputGroup className='w-75 px-3'>
-                {loading ? <h4 className='text-danger'>Loading...</h4> :
-                    <MDBInputGroupElement type='text' onChange={(e) => setName(e.target.value)}
-                                          placeholder="Category name" autoFocus required/>}
-                <MDBBtn type='submit' disabled={loading} outline>Save</MDBBtn>
-            </MDBInputGroup>
-        </form>
-    )
+    const searched = (search) => (c) => c.slug.toLowerCase().includes(search)
 
     return (
         <MDBContainer className='p-0' fluid>
@@ -85,15 +72,18 @@ const CategoryCreate = () => {
                     <AdminNav/>
                 </div>
                 <div className='d-flex row w-75'>
-                    <h4 className='my-4 text-uppercase'>Create category</h4>
-                    {CategoryForm()}
+                    <h4 className='m-4 text-uppercase'>Create category</h4>
+                    <CategoryForm handleSubmit={handleSubmit} setName={setName} loading={loading} name={name}/>
+                    <MDBContainer className='w-75 m-0 px-3 mb-3'>
+                        <LocalSearch search={search} setSearch={setSearch}/>
+                    </MDBContainer>
                     <MDBContainer className='p-0'>
                         <MDBListGroup className='w-75 px-3' horizontal>
                             <MDBListGroupItem disabled active aria-current='true' className='w-100'>
                                 Categories
                             </MDBListGroupItem>
                         </MDBListGroup>
-                        {categories.map((c) => (
+                        {categories.filter(searched(search)).map((c) => (
                             <MDBListGroup className='px-3 w-75' horizontal key={c._id}>
                                 <MDBListGroupItem className='w-100'>
                                     {c.slug}
