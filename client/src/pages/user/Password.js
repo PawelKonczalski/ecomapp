@@ -27,8 +27,8 @@ const Password = () => {
 
     const passwordUpdateForm = () => (
         <form onSubmit={handleSubmit}>
-            <MDBInputGroup>
-                <MDBInputGroupText>Your Password</MDBInputGroupText>
+            <MDBInputGroup className='w-75'>
+                <MDBInputGroupText>Password</MDBInputGroupText>
                 {loading ? <h4 className='text-danger'>Loading...</h4> :
                     <MDBInputGroupElement type='password' placeholder='Enter new password'
                                           onChange={e => setPassword(e.target.value)}
@@ -44,17 +44,15 @@ const Password = () => {
     )
 
     return (
-        <MDBContainer className='p-0' fluid>
-            <div className='d-flex'>
-                <div className='w-25'>
+        <MDBContainer className='d-flex p-0' fluid>
+                <MDBContainer className='w-25'>
                     <UserNav/>
-                </div>
-                <div className='row align-self-center'>
-                    {loading ? <h4 className='text-danger mb-3'>Loading...</h4> :
-                        <h4 className='mb-3'>Password update</h4>}
+                </MDBContainer>
+                <MDBContainer className='row align-self-center w-75'>
+                    {loading ? <h4 className='text-danger mb-3 text-uppercase'>Loading...</h4> :
+                        <h4 className='mb-3 text-uppercase'>Password update</h4>}
                     {passwordUpdateForm()}
-                </div>
-            </div>
+                </MDBContainer>
         </MDBContainer>
     )
 }

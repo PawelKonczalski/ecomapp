@@ -66,19 +66,18 @@ const CategoryCreate = () => {
     const searched = (search) => (c) => c.slug.toLowerCase().includes(search)
 
     return (
-        <MDBContainer className='p-0' fluid>
-            <div className='d-flex'>
-                <div className='w-25'>
+        <MDBContainer className='p-0 d-flex' fluid>
+                <MDBContainer className='w-25'>
                     <AdminNav/>
-                </div>
-                <div className='d-flex row w-75'>
-                    <h4 className='m-4 text-uppercase'>Create category</h4>
-                    <CategoryForm handleSubmit={handleSubmit} setName={setName} loading={loading} name={name}/>
+                </MDBContainer>
+                <MDBContainer className='d-flex row w-75'>
+                    <h4 className='my-4 ps-3 text-uppercase'>Create category</h4>
+                    <CategoryForm handleSubmit={handleSubmit} setName={setName} loading={loading} name={name} header={'Category name'}/>
                     <MDBContainer className='w-75 m-0 px-3 mb-3'>
                         <LocalSearch search={search} setSearch={setSearch}/>
                     </MDBContainer>
                     <MDBContainer className='p-0'>
-                        <MDBListGroup className='w-75 px-3' horizontal>
+                        <MDBListGroup className='w-75 px-3'>
                             <MDBListGroupItem disabled active aria-current='true' className='w-100'>
                                 Categories
                             </MDBListGroupItem>
@@ -101,8 +100,7 @@ const CategoryCreate = () => {
                             </MDBListGroup>
                         ))}
                     </MDBContainer>
-                </div>
-            </div>
+                </MDBContainer>
         </MDBContainer>
     )
 }

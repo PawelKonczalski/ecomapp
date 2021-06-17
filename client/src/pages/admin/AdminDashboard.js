@@ -3,13 +3,13 @@ import AdminNav from "../../components/nav/AdminNav";
 import {MDBContainer} from "mdb-react-ui-kit";
 
 const AdminDashboard = () => (
-    <MDBContainer className='p-0' fluid>
-        <div className='d-flex'>
-            <div className='w-25'>
+    <MDBContainer className='p-0 d-flex' fluid>
+            <MDBContainer className='w-25'>
                 <AdminNav/>
-            </div>
-            <div className='d-flex justify-content-center align-items-center w-75'>admin dashboard</div>
-        </div>
+            </MDBContainer>
+            <MDBContainer className='d-flex row w-75'>
+                admin dashboard
+            </MDBContainer>
     </MDBContainer>
 )
 
