@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from "react";
 import AdminNav from "../../../components/nav/AdminNav";
-import {
-    MDBContainer, MDBIcon, MDBListGroup,
-    MDBListGroupItem
-} from "mdb-react-ui-kit";
+import {MDBContainer, MDBIcon, MDBListGroup, MDBListGroupItem} from "mdb-react-ui-kit";
 import {toast} from "react-toastify";
 import {useSelector} from "react-redux";
 import {createCategory, removeCategory, getCategories} from "../../../functions/category";

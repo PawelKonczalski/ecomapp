@@ -35,16 +35,14 @@ const CategoryUpdate = ({history, match}) => {
     }
 
     return (
-        <MDBContainer className='p-0' fluid>
-            <div className='d-flex'>
-                <div className='w-25'>
+        <MDBContainer className='p-0 d-flex' fluid>
+                <MDBContainer className='w-25'>
                     <AdminNav/>
-                </div>
-                <div className='d-flex row w-75'>
+                </MDBContainer>
+                <MDBContainer className='d-flex row w-75'>
                     <h4 className=' my-4 text-uppercase'>Update category</h4>
                     <CategoryForm handleSubmit={handleSubmit} setName={setName} loading={loading} name={name}/>
-                </div>
-            </div>
+                </MDBContainer>
         </MDBContainer>
     )
 }
