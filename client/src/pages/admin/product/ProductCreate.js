@@ -4,7 +4,7 @@ import {MDBContainer} from "mdb-react-ui-kit";
 import {toast} from "react-toastify";
 import {useSelector} from "react-redux";
 import {createProduct} from "../../../functions/product";
-import {getCategories} from "../../../functions/category";
+import {getCategories, getCategorySubs} from "../../../functions/category";
 import ProductCreateForm from "../../../functions/ProductCreateForm";
 
 const initialState = {
@@ -27,6 +27,8 @@ const initialState = {
 
 const ProductCreate = () => {
     const [values, setValues] = useState(initialState)
+    const [subOptions, setSubOptions] = useState([])
+    const [showSub, setShowSubs] = useState(false)
     const {user} = useSelector((state) => ({...state}))
 
     useEffect(() => {
@@ -54,6 +56,17 @@ const ProductCreate = () => {
         setValues({...values, [e.target.name]: e.target.value})
     }
 
+    const handleCategoryChange = (e) => {
+        e.preventDefault()
+        setValues({...values, subs: [], category: e.target.value})
+        getCategorySubs(e.target.value)
+            .then(res => {
+                setSubOptions(res.data)
+            })
+        setShowSubs(true)
+
+    }
+
     return (
         <MDBContainer className='p-0 d-flex' fluid>
             <MDBContainer className='w-25'>
@@ -62,7 +75,9 @@ const ProductCreate = () => {
             <MDBContainer className='d-flex row w-75'>
                 <h4 className='my-4 ps-3 text-uppercase'>Create Product</h4>
                 <MDBContainer className='p-3'>
-                    <ProductCreateForm handleSubmit={handleSubmit} handleChange={handleChange} values={values}/>
+                    <ProductCreateForm handleSubmit={handleSubmit} handleChange={handleChange}
+                                       handleCategoryChange={handleCategoryChange} subOptions={subOptions}
+                                       setValues={setValues} showSub={showSub} values={values}/>
                 </MDBContainer>
             </MDBContainer>
         </MDBContainer>

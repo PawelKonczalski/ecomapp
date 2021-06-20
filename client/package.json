@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "firebase": "^8.6.5",
     "mdb-react-ui-kit": "^1.0.0-beta6",
+    "multiselect-react-dropdown": "^2.0.1",
     "node": "^14.16.1",
     "node-sass": "^6.0.0",
     "react": "^17.0.2",

@@ -1,9 +1,14 @@
 import React from "react";
+import Multiselect from "multiselect-react-dropdown";
 import {MDBBtn, MDBContainer, MDBInputGroup, MDBInputGroupElement} from "mdb-react-ui-kit";
 
-const ProductCreateForm = ({handleSubmit, handleChange, values}) => {
+const ProductCreateForm = ({handleSubmit, handleChange, handleCategoryChange, subOptions, setValues, showSub, values}) => {
     const {title, slug, description, price, categories, category, subs, quantity, images, shipment, shipping, languages,
         language, brands, brand} = values
+
+    const state = {
+        options: [{name: 'Option 1️⃣', id: 1},{name: 'Option 2️⃣', id: 2},{name: 'Option 3', id: 3},{name: 'Option 4️⃣', id: 4}]
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -56,12 +61,22 @@ const ProductCreateForm = ({handleSubmit, handleChange, values}) => {
             <MDBContainer className='w-100 m-0 px-0 my-3'>
                 <h5>Categories</h5>
                 <select name="category" id="" className='form-control w-50 bg-info text-white'
-                        onChange={handleChange} defaultValue={'default'}>
+                        onChange={handleCategoryChange} defaultValue={'default'}>
                     <option value='default' disabled>Please select</option>
                     {categories.length > 0 && categories.map((c) => (
                         <option key={c._id} value={c._id}>{c.slug}</option>))}
                 </select>
             </MDBContainer>
+            {showSub && <MDBContainer className='w-100 m-0 px-0 my-3'>
+                <h5>Sub-categories</h5>
+                <Multiselect id='select-sub'
+                    options={subOptions}
+                    placeholder={'Please select'}
+                    onSelect={value => setValues({...values, subs: value.map(s => s._id)})}
+                    onRemove={value => setValues({...values, subs: value.map(s => s._id)})}
+                    displayValue='slug'
+                />
+            </MDBContainer>}
             <MDBBtn type='submit' rounded className='w-25 my-3'>Save</MDBBtn>
         </form>
     )
