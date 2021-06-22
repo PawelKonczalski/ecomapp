@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import AdminNav from "../../../components/nav/AdminNav";
-import {MDBContainer} from "mdb-react-ui-kit";
+import {MDBContainer, MDBSpinner} from "mdb-react-ui-kit";
 import {toast} from "react-toastify";
 import {useSelector} from "react-redux";
 import {createProduct} from "../../../functions/product";
 import {getCategories, getCategorySubs} from "../../../functions/category";
-import ProductCreateForm from "../../../functions/ProductCreateForm";
+import ProductCreateForm from "../../../components/forms/ProductCreateForm";
+import FileUpload from "../../../components/forms/FileUpload";
 
 const initialState = {
     title: '',
@@ -29,6 +30,7 @@ const ProductCreate = () => {
     const [values, setValues] = useState(initialState)
     const [subOptions, setSubOptions] = useState([])
     const [showSub, setShowSubs] = useState(false)
+    const [loading, setLoading] = useState(false)
     const {user} = useSelector((state) => ({...state}))
 
     useEffect(() => {
@@ -73,7 +75,10 @@ const ProductCreate = () => {
                 <AdminNav/>
             </MDBContainer>
             <MDBContainer className='d-flex row w-75'>
-                <h4 className='my-4 ps-3 text-uppercase'>Create Product</h4>
+                {loading ?     <MDBSpinner role='status' className={'m-4 p-4 text-danger'}>
+                    <span className='visually-hidden'>Loading...</span>
+                </MDBSpinner> : <h4 className='my-4 ps-3 text-uppercase'>Create Product</h4>}
+                <FileUpload values={values} setValues={setValues} setLoading={setLoading}/>
                 <MDBContainer className='p-3'>
                     <ProductCreateForm handleSubmit={handleSubmit} handleChange={handleChange}
                                        handleCategoryChange={handleCategoryChange} subOptions={subOptions}

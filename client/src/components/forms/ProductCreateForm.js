@@ -6,10 +6,6 @@ const ProductCreateForm = ({handleSubmit, handleChange, handleCategoryChange, su
     const {title, slug, description, price, categories, category, subs, quantity, images, shipment, shipping, languages,
         language, brands, brand} = values
 
-    const state = {
-        options: [{name: 'Option 1️⃣', id: 1},{name: 'Option 2️⃣', id: 2},{name: 'Option 3', id: 3},{name: 'Option 4️⃣', id: 4}]
-    }
-
     return (
         <form onSubmit={handleSubmit}>
             <MDBInputGroup className='py-2 w-75'>
@@ -69,7 +65,7 @@ const ProductCreateForm = ({handleSubmit, handleChange, handleCategoryChange, su
             </MDBContainer>
             {showSub && <MDBContainer className='w-100 m-0 px-0 my-3'>
                 <h5>Sub-categories</h5>
-                <Multiselect id='select-sub'
+                <Multiselect
                     options={subOptions}
                     placeholder={'Please select'}
                     onSelect={value => setValues({...values, subs: value.map(s => s._id)})}
