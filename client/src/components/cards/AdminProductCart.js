@@ -9,6 +9,7 @@ import {
     MDBCardTitle,
     MDBContainer
 } from "mdb-react-ui-kit";
+import {Link} from "react-router-dom";
 
 const AdminProductCart = ({product, handleRemove}) => {
     const {title, description, images, slug} = product
@@ -23,7 +24,10 @@ const AdminProductCart = ({product, handleRemove}) => {
                         {`${description && description.substring(0, 50)}...`}
                     </MDBCardText>
                     <MDBBtnGroup className={'w-100'} shadow='0'>
-                        <MDBBtn color='warning'>Edit</MDBBtn>
+                       <Link className={'ripple ripple-surface btn btn-warning '} to={`/admin/product/${slug}`} >
+                           Edit
+                           {/*<MDBBtn color='warning'>Edit</MDBBtn>*/}
+                       </Link>
                         <MDBBtn color='danger' onClick={() => handleRemove(slug)}>Delete</MDBBtn>
                     </MDBBtnGroup>
                 </MDBCardBody>
