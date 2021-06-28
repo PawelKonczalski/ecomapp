@@ -26,7 +26,6 @@ const AdminProductCart = ({product, handleRemove}) => {
                     <MDBBtnGroup className={'w-100'} shadow='0'>
                        <Link className={'ripple ripple-surface btn btn-warning '} to={`/admin/product/${slug}`} >
                            Edit
-                           {/*<MDBBtn color='warning'>Edit</MDBBtn>*/}
                        </Link>
                         <MDBBtn color='danger' onClick={() => handleRemove(slug)}>Delete</MDBBtn>
                     </MDBBtnGroup>
